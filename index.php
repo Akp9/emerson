@@ -1,4 +1,6 @@
 <?php
+// Branch test
+
 require 'vendor/autoload.php';
 date_default_timezone_set('America/New_York');
 
@@ -31,7 +33,7 @@ $app->post('/contact', function() use($app){
   $name = $app->request->post('name');
   $email = $app->request->post('email');
   $msg = $app->request->post('msg');
-  
+
   if( !empty($name) AND !empty($email) AND !empty($msg) ){
     $cleanName = filter_var($name, FILTER_SANITIZE_STRING);
     $cleanEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
@@ -40,11 +42,11 @@ $app->post('/contact', function() use($app){
     // Error message
     $app->redirect('/contact');
   }
-  
-  
+
+
   $transport = Swift_SendmailTransport::newInstance('/usr/sbin/sendmail -bs');
   $mailer = \Swift_Mailer::newInstance($transport);
-  
+
   $message = \Swift_Message::newInstance();
   $message->setSubject('Email from our website');
   $message->setFrom(array(
@@ -52,9 +54,9 @@ $app->post('/contact', function() use($app){
   ));
   $message->setTo(array('treehouse@localhost'));
   $message->setBody($cleanMsg);
-  
+
   $result = $mailer->send($message);
-  
+
   if( $result > 0 ) {
     //send message to the user: succes
     $app->redirect('/');
@@ -63,7 +65,7 @@ $app->post('/contact', function() use($app){
     // log that error
     $app->redirect('/contact');
   }
-  
+
 });
 
 $app->run();
