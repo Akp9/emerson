@@ -6,9 +6,6 @@ Taking what you have learned so far with basic syntax, functions, and object ori
 # Technologies
 
 composer
-
 slim framework
-
 swiftmailer
-
 monolog
