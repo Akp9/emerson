@@ -52,7 +52,7 @@ $app->post('/contact', function() use($app){
   $message->setFrom(array(
     $cleanEmail => $cleanName
   ));
-  $message->setTo(array('treehouse@localhost'));
+  $message->setTo(array('szana.szabolcs@gmail.com'));
   $message->setBody($cleanMsg);
 
   $result = $mailer->send($message);
